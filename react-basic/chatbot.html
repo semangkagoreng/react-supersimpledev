@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
     <title>chatbot</title>
@@ -9,25 +9,40 @@
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
     <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
-    
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-        function ChatInput(){
-            return (<div>
-                <input/>
-                <button> Submit </button>
-                </div>)
-        }
+      function ChatInput() {
+        return (
+          <>
+            <input placeholder="send a message to chatbot" size="30" />
+            <button> Submit </button>
+          </>
+        );
+      }
 
-        const container = document.querySelector(".container");
-        const form = (<div>
-            <ChatInput />
-            </div>);
-            ReactDOM.createRoot(container).render(form);
+      function Message({ message, sender }) {
+        return (
+          <div>
+            {sender === "robot" && <img src="/image/bot.png" width="50"></img>}
+            {message}
+            {sender === "user" && <img src="/image/user.png" width="50"></img>}
+          </div>
+        );
+      }
+      const nowDays = dayjs().format("dddd D MMMM YYYY");
+
+      const container = document.querySelector(".container");
+      const form = (
+        <div>
+          <ChatInput />
+          <Message message="Hello robot,my name is dewa" sender="user" />
+          <Message message="Hello,How can i help you dewa" sender="robot" />
+          <Message message="what date is today?" sender="user" />
+          <Message message={`today date is ${nowDays}`} sender="robot" />
+        </div>
+      );
+      ReactDOM.createRoot(container).render(form);
     </script>
     <script src="react-basic.js"></script>
   </body>
 </html>
-
-
-
