@@ -30,18 +30,25 @@
         );
       }
       const nowDays = dayjs().format("dddd D MMMM YYYY");
-
       const container = document.querySelector(".container");
-      const form = (
-        <div>
-          <ChatInput />
-          <Message message="Hello robot,my name is dewa" sender="user" />
-          <Message message="Hello,How can i help you dewa" sender="robot" />
-          <Message message="what date is today?" sender="user" />
-          <Message message={`today date is ${nowDays}`} sender="robot" />
-        </div>
-      );
-      ReactDOM.createRoot(container).render(form);
+      function ChatMessage(){
+      return (<>
+            <Message message="Hello robot,my name is dewa" sender="user" />
+            <Message message="Hello,How can i help you dewa" sender="robot" />
+            <Message message="what date is today?" sender="user" />
+            <Message message={`today date is ${nowDays}`} sender="robot" />
+      </>)
+      }
+
+      function App(){
+        return (
+          <div>
+            <ChatInput />
+            <ChatMessage />
+          </div>
+        )
+      }
+      ReactDOM.createRoot(container).render(<App />);
     </script>
     <script src="react-basic.js"></script>
   </body>
