@@ -11,45 +11,75 @@
     <script src="https://unpkg.com/supersimpledev/dayjs.js"></script>
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-      function ChatInput() {
-        return (
-          <>
-            <input placeholder="send a message to chatbot" size="30" />
-            <button> Submit </button>
-          </>
-        );
-      }
+      const nowDays = dayjs().format("dddd D MMMM YYYY");
+      const container = document.querySelector(".container");
 
       function Message({ message, sender }) {
         return (
           <div>
-            {sender === "robot" && <img src="/image/bot.png" width="50"></img>}
+            {sender === "robot" && <img src="/image/bot.png" width="50" />}
             {message}
-            {sender === "user" && <img src="/image/user.png" width="50"></img>}
+            {sender === "user" && <img src="/image/user.png" width="50" />}
           </div>
         );
       }
-      const nowDays = dayjs().format("dddd D MMMM YYYY");
-      const container = document.querySelector(".container");
-      function ChatMessage(){
-      return (<>
-            <Message message="Hello robot,my name is dewa" sender="user" />
-            <Message message="Hello,How can i help you dewa" sender="robot" />
-            <Message message="what date is today?" sender="user" />
-            <Message message={`today date is ${nowDays}`} sender="robot" />
-      </>)
-      }
 
-      function App(){
+      function ChatMessages({ chatMessage }) {
         return (
           <div>
-            <ChatInput />
-            <ChatMessage />
+            {chatMessage.map(({ message, sender, id }) => (
+              <Message key={id} message={message} sender={sender} />
+            ))}
           </div>
-        )
+        );
       }
+
+      function ChatInput({ chatMessage, setChatMessage }) {
+        // ✅ State for the input lives here
+        const [inputValue, setInputValue] = React.useState("");
+
+        function sendMessage() {
+          if (inputValue === "") return; // Don't send empty messages
+          // ✅ Correctly spreads old messages and adds the new one
+          setChatMessage([...chatMessage, {
+            message: inputValue,
+            sender: "user",
+            id: crypto.randomUUID()
+          }]);
+          setInputValue(""); // Clear the input after sending
+        }
+
+        return (
+          <>
+            <input
+              placeholder="send a message to chatbot"
+              size="30"
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <button onClick={sendMessage}>Submit</button>
+          </>
+        );
+      }
+
+      function App() {
+        // ✅ State lives in App and is passed down as props
+        const [chatMessage, setChatMessage] = React.useState([
+          { message: "Hello robot, my name is dewa", sender: "user", id: "1" },
+          { message: "Hello, how can I help you dewa?", sender: "robot", id: "2" },
+          { message: "What date is today?", sender: "user", id: "3" },
+          { message: `Today's date is ${nowDays}`, sender: "robot", id: "4" },
+        ]);
+
+        return (
+          <div>
+            <ChatInput chatMessage={chatMessage} setChatMessage={setChatMessage} />
+            <ChatMessages chatMessage={chatMessage} />
+          </div>
+        );
+      }
+
       ReactDOM.createRoot(container).render(<App />);
     </script>
-    <script src="react-basic.js"></script>
   </body>
 </html>
