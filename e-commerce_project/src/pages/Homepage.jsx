@@ -1,9 +1,11 @@
+import './Homepage.css';
+import './Header.css';
 
-
-export default function Homepage(){
-    return( 
-        <>
-         <div className="header">
+export const Homepage = () => {
+  return (
+    <>
+    <title>homepage</title>
+      <div className="header">
       <div className="left-section">
         <a href="index.html" className="header-link">
           <img className="logo"
@@ -185,7 +187,7 @@ export default function Homepage(){
         </div>
       </div>
     </div>
-
-    </>
-    )
+ </>
+  )
 }
+
