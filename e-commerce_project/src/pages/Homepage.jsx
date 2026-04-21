@@ -2,10 +2,10 @@ import "./Homepage.css";
 import axios from 'axios'
 import { useEffect,useState } from "react";
 import { Header } from "../components/header";
+import { formatMoney } from "../utils/money";
 
-export const Homepage = () => {
+export const Homepage = ({cart}) => {
   const [products,setProducts] = useState([]);
-  const [cart,setCart] = useState([]);
   
 useEffect(() => {
   const fetchCart = async () => {
@@ -19,19 +19,6 @@ useEffect(() => {
   }
   fetchCart()
 },[])
-
- useEffect(() => {
-    const fetchCart = async () => {
-      try{
-        const response = await axios.get('/api/cart-items');
-        setCart(response.data);
-      }
-      catch(e){
-        console.error(e)
-      }
-    }
-    fetchCart()
- },[])
    
  
 
@@ -64,7 +51,7 @@ useEffect(() => {
                 </div>
 
                 <div className="product-price">
-                  ${(product.priceCents / 100).toFixed(2)}
+                  {formatMoney(product.priceCents)}
                 </div>
 
                 <div className="product-quantity-container">

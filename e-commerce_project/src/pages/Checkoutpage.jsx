@@ -1,12 +1,14 @@
 import './checkout-header.css';
 import './checkout.css'
-import { Header } from '../components/header';
+import { formatMoney } from '../utils/money';
 
-export function Checkout(){
+export function Checkout({cart}){
+
+  console.log(cart);
     return <>
     <title>Checkout</title>
 
-         <div className="checkout-header">
+      <div className="checkout-header">
       <div className="header-content">
         <div className="checkout-header-left-section">
           <a href="/">
@@ -31,18 +33,22 @@ export function Checkout(){
 
       <div className="checkout-grid">
         <div className="order-summary">
-          <div className="cart-item-container">
+            
+          {cart.map((item) => {
+
+            return (
+          <div key={item.id} className="cart-item-container">
             <div className="delivery-date">
               Delivery date: Tuesday, June 21
             </div>
 
             <div className="cart-item-details-grid">
               <img className="product-image"
-                src="images/products/athletic-cotton-socks-6-pairs.jpg" />
+                src={item.product.image} />
 
               <div className="cart-item-details">
                 <div className="product-name">
-                  Black and Gray Athletic Cotton Socks - 6 Pairs
+                  {item.product.name}
                 </div>
                 <div className="product-price">
                   $10.90
@@ -106,80 +112,12 @@ export function Checkout(){
               </div>
             </div>
           </div>
+            )
 
-          <div className="cart-item-container">
-            <div className="delivery-date">
-              Delivery date: Wednesday, June 15
-            </div>
 
-            <div className="cart-item-details-grid">
-              <img className="product-image"
-                src="images/products/intermediate-composite-basketball.jpg" />
+          })}
 
-              <div className="cart-item-details">
-                <div className="product-name">
-                  Intermediate Size Basketball
-                </div>
-                <div className="product-price">
-                  $20.95
-                </div>
-                <div className="product-quantity">
-                  <span>
-                    Quantity: <span className="quantity-label">1</span>
-                  </span>
-                  <span className="update-quantity-link link-primary">
-                    Update
-                  </span>
-                  <span className="delete-quantity-link link-primary">
-                    Delete
-                  </span>
-                </div>
-              </div>
 
-              <div className="delivery-options">
-                <div className="delivery-options-title">
-                  Choose a delivery option:
-                </div>
-
-                <div className="delivery-option">
-                  <input type="radio" className="delivery-option-input"
-                    name="delivery-option-2" />
-                  <div>
-                    <div className="delivery-option-date">
-                      Tuesday, June 21
-                    </div>
-                    <div className="delivery-option-price">
-                      FREE Shipping
-                    </div>
-                  </div>
-                </div>
-                <div className="delivery-option">
-                  <input type="radio" checked className="delivery-option-input"
-                    name="delivery-option-2" />
-                  <div>
-                    <div className="delivery-option-date">
-                      Wednesday, June 15
-                    </div>
-                    <div className="delivery-option-price">
-                      $4.99 - Shipping
-                    </div>
-                  </div>
-                </div>
-                <div className="delivery-option">
-                  <input type="radio" className="delivery-option-input"
-                    name="delivery-option-2" />
-                  <div>
-                    <div className="delivery-option-date">
-                      Monday, June 13
-                    </div>
-                    <div className="delivery-option-price">
-                      $9.99 - Shipping
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
 
         <div className="payment-summary">
