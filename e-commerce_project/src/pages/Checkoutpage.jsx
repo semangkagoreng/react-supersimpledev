@@ -1,10 +1,22 @@
 import './checkout-header.css';
 import './checkout.css'
+import axios from 'axios';
+import dayjs from 'dayjs';
+import { useEffect,useState } from 'react';
 import { formatMoney } from '../utils/money';
 
 export function Checkout({cart}){
 
-  console.log(cart);
+  const [delivery,setDelivery] = useState();
+
+  useEffect(() => {
+    const fetchDelivery = async () => {
+     const response = await axios.get('/api/delivery-options?expand=estimatedDeliveryTime')
+     setDelivery(response.data)
+    }
+    fetchDelivery();
+  },[])
+
     return <>
     <title>Checkout</title>
 
@@ -51,11 +63,11 @@ export function Checkout({cart}){
                   {item.product.name}
                 </div>
                 <div className="product-price">
-                  $10.90
+                  {formatMoney(item.product.priceCents)}
                 </div>
                 <div className="product-quantity">
                   <span>
-                    Quantity: <span className="quantity-label">2</span>
+                    Quantity: <span className="quantity-label">{item.quantity}</span>
                   </span>
                   <span className="update-quantity-link link-primary">
                     Update
@@ -113,8 +125,6 @@ export function Checkout({cart}){
             </div>
           </div>
             )
-
-
           })}
 
 
