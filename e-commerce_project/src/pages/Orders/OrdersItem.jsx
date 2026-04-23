@@ -1,35 +1,13 @@
-import './orders.css'
-import { Header } from '../components/header';
-import {useState,useEffect,Fragment} from 'react';
-import { formatMoney } from '../utils/money';
-import dayjs from 'dayjs';
-import axios from 'axios';
 
+import { formatMoney } from "../../utils/money";
+import dayjs from "dayjs";
+import { Fragment } from "react";
 
-export function Orders({cart}){
-    const [orders,setOrders] = useState([]);
+export function OrdersItem({orders}){
     
-    useEffect(() => {
-      const fetchOrders = async () => {
-        const response = await axios.get('/api/orders?expand=products');
-        setOrders(response.data)
-      }
-      fetchOrders()
-    }, [])
-    
-    
-    
-    return <> 
-    <title>Orders</title>
-
-    <Header cart={cart}/>
-
-    <div className="orders-page">
-      <div className="page-title">Your Orders</div>
-
-      <div className="orders-grid">
-
-        {orders.map((orderItem) => {
+    return (
+        <>
+         {orders.map((orderItem) => {
     return (
         <div className="order-container" key={orderItem.id}>
           <div className="order-header">
@@ -94,7 +72,7 @@ export function Orders({cart}){
       
       )
         })}
-      </div>
-    </div>
-    </>
+        
+        </>
+    )
 }

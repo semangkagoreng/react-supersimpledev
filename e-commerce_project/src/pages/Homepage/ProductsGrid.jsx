@@ -1,33 +1,7 @@
-import "./Homepage.css";
-import axios from 'axios'
-import { useEffect,useState } from "react";
-import { Header } from "../components/header";
-import { formatMoney } from "../utils/money";
+import { formatMoney } from "../../utils/money"
 
-export const Homepage = ({cart}) => {
-  const [products,setProducts] = useState([]);
-  
-useEffect(() => {
-  const fetchCart = async () => {
-    try{
-      const response = await axios.get('/api/products')
-      setProducts(response.data)
-    }
-    catch(e){
-      console.error(e);
-    }
-  }
-  fetchCart()
-},[])
-   
- 
-
-  return (
-    <>
-      <title>Homepage</title>
-      <Header cart={cart}/>
-
-      <div className="home-page">
+export function ProductsGrid({products}){
+    return (
         <div className="products-grid">
           {products.map((product) => {
             return (
@@ -83,7 +57,5 @@ useEffect(() => {
             );
           })}
         </div>
-      </div>
-    </>
-  );
-};
+    )
+}

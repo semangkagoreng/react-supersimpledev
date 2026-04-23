@@ -1,0 +1,38 @@
+import dayjs from "dayjs";
+import { formatMoney } from "../../utils/money";
+
+
+export function DeliveryItem({delivery,item}){
+    return (
+        <>
+         {delivery.map((deliveryItem) => {
+                    let priceString = "FREE SHIPPING";
+
+                    if (deliveryItem.priceCents > 0) {
+                      priceString = `${formatMoney(deliveryItem.priceCents)} - Shipping `;
+                    }
+                    return (
+                      <div key={deliveryItem.id} className="delivery-option">
+                        <input
+                          type="radio"
+                          checked={deliveryItem.id === item.deliveryOptionId}
+                          className="delivery-option-input"
+                          name={`delivery-option-${deliveryItem.id}`}
+                        />
+                        <div>
+                          <div className="delivery-option-date">
+                            {dayjs(deliveryItem.estimatedDeliveryTimeMs).format(
+                              "dddd MMMM YYYY",
+                            )}
+                          </div>
+                          <div className="delivery-option-price">
+                            {priceString}
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+        
+        </>
+    )
+}
