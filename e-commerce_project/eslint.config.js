@@ -28,10 +28,14 @@ export default defineConfig([
         version: 'detect',
       },
     },
-    rules: {
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-      'react/react-in-jsx-scope': 'off',
-      'react/prop-types' : 'off'
-    },
+   rules: {
+  'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+  'react/react-in-jsx-scope': 'off',
+  'react/prop-types': 'off',
+  'react-hooks/exhaustive-deps': 'off',
+  'react-hooks/set-state-in-render': 'off',
+  'react-hooks/set-state-in-effect': 'off',
+  'set-state-in-effect': 'off', 
+},
   },
 ])

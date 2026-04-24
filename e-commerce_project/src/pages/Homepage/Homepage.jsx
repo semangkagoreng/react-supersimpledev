@@ -4,10 +4,10 @@ import { useEffect,useState } from "react";
 import { Header } from "../../components/header";
 import { ProductsGrid } from "./ProductsGrid";
 
-export const Homepage = ({cart}) => {
+export const Homepage = ({cart,fetchCart}) => {
   const [products,setProducts] = useState([]);
   
-useEffect(() => {
+useEffect(() => { 
   const fetchCart = async () => {
     try{
       const response = await axios.get('/api/products')
@@ -28,7 +28,7 @@ useEffect(() => {
       <Header cart={cart}/>
 
       <div className="home-page">
-        <ProductsGrid products={products} />
+        <ProductsGrid products={products} fetchCart={fetchCart} />
       </div>
     </>
   );
