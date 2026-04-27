@@ -3,7 +3,9 @@ import {DeliveryItem} from "./DeliveryItem";
 import dayjs from "dayjs";
 
 
-export function CartItem({delivery, cart}) {
+export function CartItem({delivery, cart,fetchCart}) {
+ 
+  
   return (
     <>
       {delivery.length > 0 &&
@@ -46,7 +48,7 @@ export function CartItem({delivery, cart}) {
                   <div className="delivery-options-title">
                     Choose a delivery option:
                   </div>
-                 <DeliveryItem delivery={delivery} item={item}/>
+                 <DeliveryItem delivery={delivery} item={item} fetchCart={fetchCart}/>
                 </div>
               </div>
             </div>

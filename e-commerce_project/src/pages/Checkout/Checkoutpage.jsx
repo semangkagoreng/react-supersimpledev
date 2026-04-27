@@ -5,7 +5,7 @@ import {CartItem} from './CartItem'
 import { useEffect,useState } from 'react';
 import { formatMoney } from '../../utils/money';
 
-export function Checkout({cart}){
+export function Checkout({cart,fetchCart}){
 
   const [delivery,setDelivery] = useState([]);
   const [paymentSummary,setPaymentSummary] = useState(null)
@@ -22,7 +22,7 @@ export function Checkout({cart}){
 
     fetchPaymentSummary();
     fetchDelivery();
-  },[])
+  },[cart])
 
     return <>
     <title>Checkout</title>
@@ -54,7 +54,7 @@ export function Checkout({cart}){
         <div className="order-summary">
             
        
-        <CartItem delivery={delivery} cart={cart}/>
+        <CartItem delivery={delivery} cart={cart} fetchCart={fetchCart}/>
 
         </div>
 
