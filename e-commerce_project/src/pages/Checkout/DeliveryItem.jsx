@@ -1,6 +1,6 @@
-import dayjs from "dayjs";
 import { formatMoney } from "../../utils/money";
 import axios from 'axios'
+import dayjs from 'dayjs';
 
 export function DeliveryItem({ delivery, item, fetchCart }) {
   const updateDeliveryOption = async (deliveryOptionId) => {

@@ -6,6 +6,13 @@ import {formatMoney} from '../../utils/money'
 export function Product({product,fetchCart}){
 
      const [quantity, setQuantity] = useState(1);
+const addToCart = async () => {
+               await axios.post("/api/cart-items", {
+                  productId: product.id,
+                  quantity: quantity,
+                });
+                await fetchCart();
+              }
 
   const handleQuantityChange = (event) => {
     const selectedQuantity = Number(event.target.value);
@@ -63,13 +70,7 @@ export function Product({product,fetchCart}){
 
             <button
               className="add-to-cart-button button-primary"
-              onClick={async () => {
-               await axios.post("/api/cart-items", {
-                  productId: product.id,
-                  quantity: quantity,
-                });
-                await fetchCart();
-              }}
+              onClick={addToCart}
             >
               Add to Cart
             </button>

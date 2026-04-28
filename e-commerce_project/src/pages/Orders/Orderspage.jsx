@@ -5,7 +5,7 @@ import axios from 'axios';
 import {OrdersItem} from './OrdersItem'
 
 
-export function Orders({cart}){
+export function Orders({cart,fetchCart}){
     const [orders,setOrders] = useState([]);
     
     useEffect(() => {
@@ -28,7 +28,7 @@ export function Orders({cart}){
 
       <div className="orders-grid">
 
-    <OrdersItem orders={orders}/>
+    <OrdersItem orders={orders} fetchCart={fetchCart}/>
        
       </div>
     </div>
