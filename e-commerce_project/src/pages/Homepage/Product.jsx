@@ -1,6 +1,7 @@
 import axios from 'axios';
 import {useState} from 'react'
 import {formatMoney} from '../../utils/money'
+import React from 'react';
 
 
 export function Product({product,fetchCart}){
