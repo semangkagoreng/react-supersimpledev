@@ -1,5 +1,6 @@
 
 import { Product } from "./Product";
+import React from "react";
 
 export function ProductsGrid({ products, fetchCart }) {
 

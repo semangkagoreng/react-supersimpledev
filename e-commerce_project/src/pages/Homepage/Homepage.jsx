@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useEffect,useState } from "react";
 import { Header } from "../../components/header";
 import { ProductsGrid } from "./ProductsGrid";
+import React from "react";
 
 export const Homepage = ({cart,fetchCart}) => {
   const [products,setProducts] = useState([]);

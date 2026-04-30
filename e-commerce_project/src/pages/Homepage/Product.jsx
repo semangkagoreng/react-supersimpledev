@@ -23,7 +23,7 @@ const addToCart = async () => {
     return (
          <div key={product.id} className="product-container">
             <div className="product-image-container">
-              <img className="product-image" src={product.image} />
+              <img className="product-image" src={product.image} data-testid="productImage" />
             </div>
 
             <div className="product-name limit-text-to-2-lines">
@@ -72,6 +72,7 @@ const addToCart = async () => {
             <button
               className="add-to-cart-button button-primary"
               onClick={addToCart}
+              data-testid="addToCartButton"
             >
               Add to Cart
             </button>
